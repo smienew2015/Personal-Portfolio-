@@ -1,0 +1,675 @@
+                   <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smienew Dessie · Interactive Portfolio</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #f5f7fc;
+            color: #1e1e2f;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* header / hero */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 2.5rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 35px -8px rgba(0, 20, 30, 0.1);
+            transition: all 0.2s;
+        }
+
+        .hero-text {
+            flex: 2 1 350px;
+        }
+
+        .hero-text .badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #2d3e8f;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #0b1b3a;
+        }
+
+        .hero-text .subhead {
+            font-size: 1.2rem;
+            color: #3e4c6b;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            border-left: 4px solid #2d3e8f;
+            padding-left: 1.2rem;
+        }
+
+        .hero-text .current-role {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #f0f4ff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 100px;
+            width: fit-content;
+            font-weight: 500;
+            color: #1a2b5c;
+        }
+
+        .hero-text .current-role i {
+            color: #2d3e8f;
+            font-size: 1.2rem;
+        }
+
+        .hero-avatar {
+            flex: 1 1 200px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .avatar-icon {
+            background: linear-gradient(145deg, #1e2b4f, #2d3e8f);
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 30px -8px rgba(28, 48, 100, 0.3);
+            color: white;
+            font-size: 5rem;
+            font-weight: 600;
+        }
+
+        /* interactive navigation tabs */
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 2.5rem 0 1.8rem 0;
+            border-bottom: 2px solid rgba(45, 62, 143, 0.15);
+            padding-bottom: 0.8rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #4a5a7a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .tab-btn i {
+            font-size: 1.1rem;
+        }
+
+        .tab-btn:hover {
+            background: #e9eefb;
+            color: #1e2b4f;
+        }
+
+        .tab-btn.active {
+            background: #1e2b4f;
+            color: white;
+            box-shadow: 0 8px 18px -6px rgba(28, 48, 100, 0.3);
+        }
+
+        /* panels */
+        .panel {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* cards & grids */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.8rem;
+            padding: 1.8rem 1.6rem;
+            box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 35px -12px rgba(28, 48, 100, 0.15);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: #0b1b3a;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card h3 i {
+            color: #2d3e8f;
+            font-size: 1.6rem;
+        }
+
+        .edu-item {
+            margin-bottom: 1.4rem;
+        }
+
+        .edu-item .degree {
+            font-weight: 700;
+            color: #1a2b5c;
+            font-size: 1.1rem;
+        }
+
+        .edu-item .institution {
+            color: #56678b;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.25rem;
+        }
+
+        .expertise-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: #eef2fd;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1e2b4f;
+            transition: background 0.2s;
+        }
+
+        .tag:hover {
+            background: #d9e2fc;
+        }
+
+        .lang-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #d0daea;
+        }
+
+        .lang-item:last-child {
+            border-bottom: none;
+        }
+
+        .lang-name {
+            font-weight: 600;
+        }
+
+        .lang-level {
+            font-size: 0.9rem;
+            background: #e9eefb;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            color: #1e2b4f;
+        }
+
+        /* research & publications */
+        .research-item {
+            background: #f9fbfe;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #2d3e8f;
+            transition: background 0.2s;
+        }
+
+        .research-item:hover {
+            background: #ffffff;
+            box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.08);
+        }
+
+        .research-item h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0b1b3a;
+            margin-bottom: 0.3rem;
+        }
+
+        .research-meta {
+            font-size: 0.85rem;
+            color: #62759b;
+            margin-bottom: 0.8rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .research-meta i {
+            margin-right: 0.3rem;
+        }
+
+        .research-desc {
+            color: #2e3a55;
+            font-size: 0.95rem;
+        }
+
+        .pill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.9rem;
+        }
+
+        .pill {
+            background: white;
+            border: 1px solid #cdd9f0;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #1e2b4f;
+            font-weight: 500;
+        }
+
+        /* stats / numbers */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .stat-item {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem 0.8rem;
+            text-align: center;
+            box-shadow: 0 8px 18px -6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #1e2b4f;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #5a6b8c;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .btn {
+            background: #1e2b4f;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 6px 14px -6px #1e2b4f60;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #2d3e8f;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1e2b4f;
+            border: 1.5px solid #1e2b4f;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: #e9eefb;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #7b89a6;
+            border-top: 1px solid #dfe6f0;
+            padding-top: 2rem;
+        }
+
+        /* responsive */
+        @media (max-width: 650px) {
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+            .avatar-icon {
+                width: 140px;
+                height: 140px;
+                font-size: 3.5rem;
+            }
+            .hero {
+                padding: 1.8rem;
+            }
+            .tab-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <div class="hero-text">
+            <div class="badge"><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i> Applied Linguistics · Pedagogy</div>
+            <h1>Smienew Dessie</h1>
+            <div class="subhead">Department Head & Lecturer of Ethiopian Languages and Literature – Amharic</div>
+            <div class="current-role">
+                <i class="fas fa-university"></i> Wollo University
+            </div>
+        </div>
+        <div class="hero-avatar">
+            <div class="avatar-icon">SD</div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE TABS -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" data-tab="about"><i class="fas fa-user"></i> About</button>
+        <button class="tab-btn" data-tab="research"><i class="fas fa-flask"></i> Research & Publications</button>
+        <button class="tab-btn" data-tab="expertise"><i class="fas fa-cogs"></i> Expertise</button>
+        <button class="tab-btn" data-tab="contact"><i class="fas fa-envelope"></i> Contact</button>
+    </div>
+
+    <!-- PANEL: ABOUT -->
+    <div id="about" class="panel active">
+        <div class="grid-2">
+            <!-- Education card -->
+            <div class="card">
+                <h3><i class="fas fa-book-open"></i> Education</h3>
+                <div class="edu-item">
+                    <div class="degree">Ph.D. in Applied Linguistics</div>
+                    <div class="institution"><i class="fas fa-map-pin"></i> Addis Ababa University · Teaching Ethiopian Languages</div>
+                </div>
+                <div class="edu-item">
+                    <div class="degree">M.Ed. in Teaching Amharic</div>
+                    <div class="institution"><i class="fas fa-map-pin"></i> Bahir Dar University</div>
+                </div>
+                <div class="edu-item">
+                    <div class="degree">B.Ed. in Amharic</div>
+                    <div class="institution"><i class="fas fa-map-pin"></i> Bahir Dar University</div>
+                </div>
+                <div style="margin-top: 1.8rem;">
+                    <h3 style="margin-bottom: 1rem;"><i class="fas fa-language"></i> Languages</h3>
+                    <div class="lang-item">
+                        <span class="lang-name">Amharic</span>
+                        <span class="lang-level">Native / Fluent</span>
+                    </div>
+                    <div class="lang-item">
+                        <span class="lang-name">English</span>
+                        <span class="lang-level">Fluent</span>
+                    </div>
+            
+            <!-- Profile summary + expertise quick view -->
+            <div class="card">
+                <h3><i class="fas fa-user-tie"></i> Profile</h3>
+                <p style="margin-bottom: 1.5rem; color: #2e3a55; font-size: 1rem;">
+                    Department Head & Lecturer at Wollo University, with a Ph.D. in Applied Linguistics (Teaching Ethiopian Languages). 
+                    Dedicated to advancing Amharic language pedagogy, curriculum innovation, and higher education research.
+                </p>
+                <h3><i class="fas fa-star"></i> Core Expertise</h3>
+                <div class="expertise-tags">
+                    <span class="tag">Applied Linguistics</span>
+                    <span class="tag">Amharic Pedagogy</span>
+                    <span class="tag">Curriculum & Syllabus</span>
+                    <span class="tag">Competency-Based Education</span>
+                    <span class="tag">Research Methodology</span>
+                    <span class="tag">E-Learning / Instructional Design</span>
+                </div>
+                <!-- quick stats -->
+                <div class="stats-grid" style="margin-top: 2rem;">
+                    <div class="stat-item">
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">Publications</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Degrees</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">12+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL: RESEARCH & PUBLICATIONS -->
+    <div id="research" class="panel">
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <h3><i class="fas fa-microscope"></i> Research Focus Areas</h3>
+            <p style="color: #2e3a55; margin-bottom: 1.2rem;">
+                Language pedagogy · academic research attitudes in higher education · Amharic syntax · composition · literature.
+            </p>
+            <div class="pill-list">
+                <span class="pill">Amharic Syntax</span>
+                <span class="pill">Composition Studies</span>
+                <span class="pill">Literature Pedagogy</span>
+                <span class="pill">Higher Education Research</span>
+                <span class="pill">E-Learning in Language</span>
+            </div>
+        </div>
+
+        <!-- featured publication / project list -->
+        <div class="research-item">
+            <h4>Attitudes towards Academic Research in Ethiopian Higher Education</h4>
+            <div class="research-meta">
+                <span><i class="fas fa-calendar-alt"></i> 2024</span>
+                <span><i class="fas fa-book"></i> Ethiopian Journal of Language Studies</span>
+            </div>
+            <div class="research-desc">
+                A mixed-methods study examining instructors' and postgraduate students' perceptions of research culture at selected universities.
+            </div>
+        </div>
+
+        <div class="research-item">
+            <h4>Competency-Based Amharic Language Instruction: Challenges and Practices</h4>
+            <div class="research-meta">
+                <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                <span><i class="fas fa-book"></i> Bahir Dar Journal of Education</span>
+            </div>
+            <div class="research-desc">
+                Investigates the implementation of CBE in Amharic teacher education programs and proposes a contextualized framework.
+            </div>
+        </div>
+
+        <div class="research-item">
+            <h4>Amharic Syntactic Complexity in Academic Writing: A Corpus-Based Analysis</h4>
+            <div class="research-meta">
+                <span><i class="fas fa-calendar-alt"></i> 2022</span>
+                <span><i class="fas fa-book"></i> Zena Lissan</span>
+            </div>
+            <div class="research-desc">
+                Analyzes clause structures and connective patterns in university students' Amharic essays to inform writing pedagogy.
+            </div>
+        </div>
+
+        <div class="research-item">
+            <h4>E-Learning Readiness for Ethiopian Language Instruction: Instructor Perspectives</h4>
+            <div class="research-meta">
+                <span><i class="fas fa-calendar-alt"></i> 2023</span>
+                <span><i class="fas fa-book"></i> Conference Proceedings, ICT in Education</span>
+            </div>
+            <div class="research-desc">
+                Explores barriers and enablers for integrating digital tools in Amharic and literature courses.
+            </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; text-align: right;">
+            <button class="btn btn-outline" onclick="alert('Full publication list available upon request.')"><i class="fas fa-download"></i> Request full CV</button>
+        </div>
+    </div>
+
+    <!-- PANEL: EXPERTISE -->
+    <div id="expertise" class="panel">
+        <div class="grid-2">
+            <div class="card">
+                <h3><i class="fas fa-chalkboard-teacher"></i> Teaching & Pedagogy</h3>
+                <ul style="list-style: none; margin-top: 0.5rem;">
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid #eef2fd;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Amharic Language Pedagogy</li>
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid #eef2fd;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Competency-Based Education</li>
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid #eef2fd;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Curriculum & Syllabus Development</li>
+                    <li style="padding: 0.6rem 0;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> E-Learning / Instructional Design</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-flask"></i> Research & Academic Leadership</h3>
+                <ul style="list-style: none; margin-top: 0.5rem;">
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid #eef2fd;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Research Methodology (Qual/Quant/Mixed)</li>
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid #eef2fd;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Academic Writing & Publication</li>
+                    <li style="padding: 0.6rem 0; border-bottom: 1px solid #eef2fd;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Departmental Leadership</li>
+                    <li style="padding: 0.6rem 0;"><i class="fas fa-check-circle" style="color: #2d3e8f; margin-right: 0.7rem;"></i> Applied Linguistics (Amharic)</li>
+                </ul>
+            </div>
+        </div>
+        <!-- domains -->
+        <div class="card" style="margin-top: 1.5rem;">
+            <h3><i class="fas fa-project-diagram"></i> Core Domains & Projects</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem;">
+                <div style="flex: 1 1 200px; background: #f4f8ff; padding: 1rem 1.2rem; border-radius: 1.2rem;">
+                    <i class="fas fa-language" style="color: #2d3e8f; font-size: 1.6rem; margin-bottom: 0.4rem;"></i>
+                    <h4 style="margin-bottom: 0.4rem;">Amharic Syntax & Composition</h4>
+                    <p style="font-size: 0.9rem; color: #3e4c6b;">Research on sentence structure and writing development.</p>
+                </div>
+                <div style="flex: 1 1 200px; background: #f4f8ff; padding: 1rem 1.2rem; border-radius: 1.2rem;">
+                    <i class="fas fa-chart-line" style="color: #2d3e8f; font-size: 1.6rem; margin-bottom: 0.4rem;"></i>
+                    <h4 style="margin-bottom: 0.4rem;">Research Attitudes</h4>
+                    <p style="font-size: 0.9rem; color: #3e4c6b;">Studies on academic research culture in higher education.</p>
+                </div>
+                <div style="flex: 1 1 200px; background: #f4f8ff; padding: 1rem 1.2rem; border-radius: 1.2rem;">
+                    <i class="fas fa-laptop-code" style="color: #2d3e8f; font-size: 1.6rem; margin-bottom: 0.4rem;"></i>
+                    <h4 style="margin-bottom: 0.4rem;">E-Learning Design</h4>
+                    <p style="font-size: 0.9rem; color: #3e4c6b;">Instructional design for language courses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL: CONTACT (simple interactive) -->
+    <div id="contact" class="panel">
+        <div class="card" style="text-align: center;">
+            <h3 style="justify-content: center;"><i class="fas fa-paper-plane"></i> Get in touch</h3>
+            <p style="margin: 1.2rem 0; color: #2e3a55;">I welcome collaborations, research inquiries, and academic conversations.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 2rem 0;">
+                <a href="#" class="btn" onclick="alert('Email: smienew.dessie@wu.edu.et (demo)'); return false;"><i class="fas fa-envelope"></i> Email</a>
+                <a href="#" class="btn btn-outline" onclick="alert('LinkedIn profile (demo)'); return false;"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="#" class="btn btn-outline" onclick="alert('Google Scholar (demo)'); return false;"><i class="fas fa-graduation-cap"></i> Scholar</a>
+            </div>
+            <p style="font-size: 0.9rem; color: #7b89a6;"><i class="fas fa-building"></i> Wollo University, Dessie, Ethiopia</p>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note">
+        <i class="fas fa-copyright"></i> Smienew Dessie · Interactive Portfolio · Built for clarity & engagement
+    </div>
+</div>
+
+<!-- interactive tab switching -->
+<script>
+    (function() {
+        const tabs = document.querySelectorAll('.tab-btn');
+        const panels = document.querySelectorAll('.panel');
+
+        function activateTab(tabId) {
+            // remove active from all tabs and panels
+            tabs.forEach(btn => btn.classList.remove('active'));
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // add active to the clicked tab
+            const activeTab = Array.from(tabs).find(btn => btn.dataset.tab === tabId);
+            if (activeTab) activeTab.classList.add('active');
+
+            // show corresponding panel
+            const activePanel = document.getElementById(tabId);
+            if (activePanel) activePanel.classList.add('active');
+        }
+
+        tabs.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tabId = btn.dataset.tab;
+                if (tabId) activateTab(tabId);
+            });
+        });
+
+        // optional: open first tab if none active
+        if (!document.querySelector('.tab-btn.active')) {
+            activateTab('about');
+        }
+    })();
+</script>
+</body>
+</html>
