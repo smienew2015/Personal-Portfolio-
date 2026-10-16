@@ -389,6 +389,83 @@
             background: #e9eefb;
         }
 
+        /* contact form additions */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin: 1.8rem 0 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            flex: 1 1 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #1e2b4f;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.9rem 1.2rem;
+            border-radius: 1.5rem;
+            border: 1.5px solid #d0daea;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #f9fbfe;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2d3e8f;
+            box-shadow: 0 0 0 4px rgba(45, 62, 143, 0.1);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2.5rem;
+            margin: 2rem 0 1rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1rem;
+            color: #2e3a55;
+        }
+
+        .contact-info-item i {
+            color: #2d3e8f;
+            font-size: 1.3rem;
+            width: 1.6rem;
+            text-align: center;
+        }
+
         .footer-note {
             text-align: center;
             margin-top: 4rem;
@@ -472,7 +549,9 @@
                         <span class="lang-level">Fluent</span>
                     </div>
                     <div class="lang-item">
-                                        </div>
+                        
+                    </div>
+                </div>
             </div>
 
             <!-- Profile summary + expertise quick view -->
@@ -621,17 +700,59 @@
         </div>
     </div>
 
-    <!-- PANEL: CONTACT (simple interactive) -->
+    <!-- PANEL: CONTACT (with improved contact form) -->
     <div id="contact" class="panel">
-        <div class="card" style="text-align: center;">
+        <div class="card" style="text-align: left;">
             <h3 style="justify-content: center;"><i class="fas fa-paper-plane"></i> Get in touch</h3>
-            <p style="margin: 1.2rem 0; color: #2e3a55;">I welcome collaborations, research inquiries, and academic conversations.</p>
-            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 2rem 0;">
+            <p style="margin: 1rem 0 0.5rem; color: #2e3a55; text-align: center;">I welcome collaborations, research inquiries, and academic conversations.</p>
+            
+            <!-- contact form -->
+            <div class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fas fa-user" style="color: #2d3e8f;"></i> Your name</label>
+                        <input type="text" id="contactName" placeholder="e.g. Dr. Abebe Bekele" />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope" style="color: #2d3e8f;"></i> Email address</label>
+                        <input type="email" id="contactEmail" placeholder="you@example.com" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-tag" style="color: #2d3e8f;"></i> Subject</label>
+                    <input type="text" id="contactSubject" placeholder="Research collaboration, invitation, etc." />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-comment" style="color: #2d3e8f;"></i> Message</label>
+                    <textarea id="contactMessage" placeholder="Write your message here..."></textarea>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; flex-wrap: wrap;">
+                    <button class="btn" id="sendMessageBtn"><i class="fas fa-paper-plane"></i> Send message</button>
+                </div>
+            </div>
+
+            <!-- direct contact details -->
+            <div class="contact-info-grid">
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>smienew.dessie@wu.edu.et</span>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+251 913367834</span>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-building"></i>
+                    <span>Wollo University, Dessie, Ethiopia</span>
+                </div>
+            </div>
+
+            <!-- social / academic buttons -->
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 2rem 0 0.5rem;">
                 <a href="#" class="btn" onclick="alert('Email: smienew.dessie@wu.edu.et (demo)'); return false;"><i class="fas fa-envelope"></i> Email</a>
                 <a href="#" class="btn btn-outline" onclick="alert('LinkedIn profile (demo)'); return false;"><i class="fab fa-linkedin"></i> LinkedIn</a>
                 <a href="#" class="btn btn-outline" onclick="alert('Google Scholar (demo)'); return false;"><i class="fas fa-graduation-cap"></i> Scholar</a>
             </div>
-            <p style="font-size: 0.9rem; color: #7b89a6;"><i class="fas fa-building"></i> Wollo University, Dessie, Ethiopia</p>
         </div>
     </div>
 
@@ -671,6 +792,33 @@
         // optional: open first tab if none active
         if (!document.querySelector('.tab-btn.active')) {
             activateTab('about');
+        }
+
+        // ---- contact form handler ----
+        const sendBtn = document.getElementById('sendMessageBtn');
+        if (sendBtn) {
+            sendBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('contactName')?.value.trim() || 'Not provided';
+                const email = document.getElementById('contactEmail')?.value.trim() || 'Not provided';
+                const subject = document.getElementById('contactSubject')?.value.trim() || 'No subject';
+                const message = document.getElementById('contactMessage')?.value.trim() || 'No message';
+
+                // simple validation
+                if (!email || !message) {
+                    alert('Please fill in both email and message fields.');
+                    return;
+                }
+
+                // show a friendly summary (demo)
+                alert(`📨 Message summary (demo):\n\nFrom: ${name}\nEmail: ${email}\nSubject: ${subject}\nMessage: ${message}\n\nYour message has been noted (simulated). I'll get back to you soon!`);
+                
+                // optionally clear fields
+                // document.getElementById('contactName').value = '';
+                // document.getElementById('contactEmail').value = '';
+                // document.getElementById('contactSubject').value = '';
+                // document.getElementById('contactMessage').value = '';
+            });
         }
     })();
 </script>
